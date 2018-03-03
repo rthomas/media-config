@@ -1,6 +1,8 @@
 ---
 - hosts: all
   roles:
+    - base
     - docker
     - prom
     - grafana
+    - sabnzbd

@@ -1,0 +1,27 @@
+- name: Add group
+  group:
+    name: media
+    gid: "{{ media_gid }}"
+    state: present
+
+- name: Add user
+  user:
+    name: media
+    uid: "{{ media_uid }}"
+    group: media
+
+- name: Create tv directory
+  file:
+    path: "{{ dir_tv }}"
+    state: directory
+    owner: media
+    group: media
+    mode: 0755
+
+- name: Create movies directory
+  file:
+    path: "{{ dir_movies }}"
+    state: directory
+    owner: media
+    group: media
+    mode: 0755
