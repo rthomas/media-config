@@ -1,0 +1,24 @@
+- name: Prometheus Docker Image
+  docker_image:
+    name: prom/prometheus
+    state: present
+
+- name: Copy config file
+  copy:
+    src: config/prometheus.yml
+    dest: /etc/prometheus.yml
+
+- name: Prometheus docker volume
+  docker_volume:
+    name: prom-data
+    state: present
+
+- name: Start prometheus container
+  docker_container:
+    name: prometheus
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - "/etc/prometheus.yml"
+      - "prom-data:/prometheus-data"

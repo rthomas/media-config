@@ -5,6 +5,15 @@
     - apt_update is defined
     - apt_update == True
 
+- name: Python Pip
+  apt:
+    update_cache: no
+    name: python-pip
+
+- name: Pip docker-py
+  pip:
+    name: docker-py
+
 - name: Docker dep - apt-transport-https
   apt:
     update_cache: no
