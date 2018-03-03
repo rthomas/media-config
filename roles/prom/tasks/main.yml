@@ -20,5 +20,21 @@
     ports:
       - "9090:9090"
     volumes:
-      - "/etc/prometheus.yml"
+      - "/etc/prometheus.yml:/etc/prometheus/prometheus.yml"
       - "prom-data:/prometheus-data"
+    networks:
+      - name: "containers"
+
+- name: Node Exporter Docker Image
+  docker_image:
+    name: prom/node-exporter
+    state: present
+
+- name: Start Node Exporter container
+  docker_container:
+    name: node_exporter
+    image: prom/node-exporter
+    ports:
+      - "9100:9100"
+    networks:
+      - name: "containers"

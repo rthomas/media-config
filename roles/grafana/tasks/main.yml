@@ -1,0 +1,20 @@
+- name: Grafana docker image
+  docker_image:
+    name: grafana/grafana
+    state: present
+
+- name: Grafana docker volume
+  docker_volume: 
+    name: grafana-data
+    state: present
+
+- name: Start grafana container
+  docker_container:
+    name: grafana
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - "grafana-data:/var/lib/grafana"
+    networks:
+      - name: "containers"

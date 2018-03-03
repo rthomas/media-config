@@ -55,3 +55,8 @@
   apt:
     update_cache: no
     name: docker-ce
+
+- name: Docker Network
+  docker_network:
+    name: containers
+    state: present
