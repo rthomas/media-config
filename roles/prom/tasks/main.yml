@@ -5,7 +5,7 @@
 
 - name: Copy config file
   copy:
-    src: config/prometheus.yml
+    src: prometheus.yml
     dest: /etc/prometheus.yml
 
 - name: Prometheus docker volume
