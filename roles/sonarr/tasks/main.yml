@@ -1,11 +1,11 @@
-- name: nzbget docker image
+- name: sonarr docker image
   docker_image:
-    name: "{{nzbget_image}}"
+    name: "{{sonarr_image}}"
     state: present
 
 - name: nzbget data dir
   file:
-    name: /opt/nzbget/
+    name: /opt/sonarr/
     state: directory
     owner: media
     group: media
@@ -13,15 +13,16 @@
 
 - name: Start container
   docker_container:
-    name: nzbget
-    image: "{{nzbget_image}}"
+    name: sonarr
+    image: "{{sonarr_image}}"
     ports:
-      - "6789:6789"
+      - "8989:8989"
     networks:
       - name: "containers"
     volumes:
       - "/etc/localtime:/etc/localtime:ro"
-      - "/opt/nzbget:/config"
+      - "/opt/sonarr:/config"
+      - "{{base_dir}}/{{media_dir}}/{{tv_dir}}:/tv"
       - "{{base_dir}}/{{media_dir}}/{{downloads_dir}}:/downloads"
     env:
       PGID: "{{media_uid}}"

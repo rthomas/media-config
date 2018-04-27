@@ -5,5 +5,5 @@
     - docker
     - prom
     - grafana
-    - sabnzbd
     - nzbget
+    - sonarr
