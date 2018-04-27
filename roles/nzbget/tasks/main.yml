@@ -11,14 +11,6 @@
     group: media
     mode: 0755
 
-- name: nzbget media dir
-  file:
-    name: "{{ nzbget_media_dir }}"
-    state: directory
-    owner: media
-    group: media
-    mode: 0755
- 
 - name: Start container
   docker_container:
     name: nzbget
@@ -29,7 +21,7 @@
       - name: "containers"
     volumes:
       - "/opt/nzbget:/config"
-      - "{{ nzbget_media_dir }}:/downloads"
+      - "{{base_dir}}/{{media_dir}}/{{downloads_dir}}:/downloads"
     env:
-      PGID: "{{ media_uid }}"
-      PUID: "{{ media_gid }}"
+      PGID: "{{media_uid}}"
+      PUID: "{{media_gid}}"
