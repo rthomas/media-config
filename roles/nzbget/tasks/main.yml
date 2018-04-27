@@ -1,0 +1,35 @@
+- name: nzbget docker image
+  docker_image:
+    name: linuxserver/nzbget
+    state: present
+
+- name: nzbget data dir
+  file:
+    name: /opt/nzbget/
+    state: directory
+    owner: media
+    group: media
+    mode: 0755
+
+- name: nzbget media dir
+  file:
+    name: "{{ nzbget_media_dir }}"
+    state: directory
+    owner: media
+    group: media
+    mode: 0755
+ 
+- name: Start container
+  docker_container:
+    name: nzbget
+    image: linuxserver/nzbget
+    ports:
+      - "6789:6789"
+    networks:
+      - name: "containers"
+    volumes:
+      - "/opt/nzbget:/config"
+      - "{{ nzbget_media_dir }}:/downloads"
+    env:
+      PGID: "{{ media_uid }}"
+      PUID: "{{ media_gid }}"
