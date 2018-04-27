@@ -1,6 +1,6 @@
 - name: Grafana docker image
   docker_image:
-    name: grafana/grafana
+    name: {{grafana_image}}
     state: present
 
 - name: Grafana docker volume
@@ -11,7 +11,7 @@
 - name: Start grafana container
   docker_container:
     name: grafana
-    image: grafana/grafana
+    image: {{grafana_image}}
     ports:
       - "3000:3000"
     volumes:

@@ -1,6 +1,6 @@
 - name: Prometheus Docker Image
   docker_image:
-    name: prom/prometheus
+    name: {{prom_image}}
     state: present
 
 - name: Copy config file
@@ -16,7 +16,7 @@
 - name: Start prometheus container
   docker_container:
     name: prometheus
-    image: prom/prometheus
+    image: {{prom_image}}
     ports:
       - "9090:9090"
     volumes:
@@ -27,13 +27,13 @@
 
 - name: Node Exporter Docker Image
   docker_image:
-    name: prom/node-exporter
+    name: {{prom_node_image}}
     state: present
 
 - name: Start Node Exporter container
   docker_container:
     name: node_exporter
-    image: prom/node-exporter
+    image: {{prom_node_image}}
     ports:
       - "9100:9100"
     networks:
