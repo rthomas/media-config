@@ -11,6 +11,11 @@
     group: media
     mode: 0755
 
+- name: Copy config file
+  copy:
+    src: nzbget.conf
+    dest: /opt/nzbget/nzbget.conf
+
 - name: Start container
   docker_container:
     name: nzbget

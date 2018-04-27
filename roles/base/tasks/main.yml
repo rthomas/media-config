@@ -26,7 +26,7 @@
     group: media
     mode: 0755
 
-- name: Create movies directory
+- name: Create downloads directory
   file:
     path: "{{base_dir}}/{{media_dir}}/{{downloads_dir}}"
     state: directory
