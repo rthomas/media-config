@@ -1,0 +1,30 @@
+- name: radarr docker image
+  docker_image:
+    name: "{{radarr_image}}"
+    state: present
+
+- name: nzbget data dir
+  file:
+    name: /opt/radarr/
+    state: directory
+    owner: media
+    group: media
+    mode: 0755
+
+- name: Start container
+  docker_container:
+    name: radarr
+    image: "{{radarr_image}}"
+    ports:
+      - "7878:7878"
+    networks:
+      - name: "containers"
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/opt/radarr:/config"
+      - "{{base_dir}}/{{media_dir}}/{{movies_dir}}:/movies"
+      - "{{base_dir}}/{{media_dir}}/{{downloads_dir}}:/downloads"
+    env:
+      PGID: "{{media_uid}}"
+      PUID: "{{media_gid}}"
+      TZ: "{{timezone}}"
