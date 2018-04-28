@@ -1,0 +1,45 @@
+- name: plex docker image
+  docker_image:
+    name: "{{plex_image}}"
+    state: present
+
+- name: plex config dir
+  file:
+    name: /opt/plex/config
+    state: directory
+    owner: media
+    group: media
+    mode: 0755
+
+- name: plex transcode dir
+  file:
+    name: /opt/plex/transcode
+    state: directory
+    owner: media
+    group: media
+    mode: 0755
+
+- name: Start container
+  docker_container:
+    name: plex
+    image: "{{plex_image}}"
+    network_mode: "host"
+    # ports:
+    #   - "32400:32400"
+    #   - "32400:32400/udp"
+    #   - "32469:32469"
+    #   - "32469:32469/udp"
+    #   - "5353:5353/udp"
+    #   - "1900:1900/udp"
+    # networks:
+    #   - name: "containers"
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/opt/plex/config:/config"
+      - "/opt/plex/transcode:/transcode"
+      - "{{base_dir}}/{{media_dir}}/{{tv_dir}}:/tv"
+      - "{{base_dir}}/{{media_dir}}/{{movies_dir}}:/movies"
+    env:
+      PGID: "{{media_uid}}"
+      PUID: "{{media_gid}}"
+      TZ: "{{timezone}}"
