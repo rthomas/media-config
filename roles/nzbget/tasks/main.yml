@@ -11,9 +11,9 @@
     group: media
     mode: 0755
 
-- name: Copy config file
-  copy:
-    src: nzbget.conf
+- name: template config file
+  template:
+    src: nzbget.conf.j2
     dest: /opt/nzbget/nzbget.conf
 
 - name: Start container

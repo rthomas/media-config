@@ -136,122 +136,7 @@ CertStore=${AppDir}/cacert.pem
 ##############################################################################
 ### NEWS-SERVERS                                                           ###
 
-# This section defines which servers NZBGet should connect to.
-#
-# The servers should be numbered subsequently without holes.
-# For example if you configure three servers you should name them as Server1,
-# Server2 and Server3. If you need to delete Server2 later you should also
-# change the name of Server3 to Server2. Otherwise it will not be properly
-# read from the config file. Server number doesn't affect its priority (level).
-
-# Use this news server (yes, no).
-#
-# Set to "no" to disable the server on program start. Servers can be activated
-# later via scheduler tasks or manually via web-interface.
-#
-# NOTE: Download is not possible when all servers on level 0 are disabled. Servers
-# on higher levels are used only if at least one server on level 0 was tried.
-Server1.Active=yes
-
-# Name of news server.
-#
-# The name is used in UI and for logging. It can be any string, you
-# may even leave it empty.
-Server1.Name=
-
-# Level (priority) of news server (0-99).
-#
-# The servers are ordered by their level. NZBGet first tries to download
-# an article from one (any) of level-0-servers. If that server fails,
-# NZBGet tries all other level-0-servers. If all servers fail, it proceeds
-# with the level-1-servers, etc.
-#
-# Put your major download servers at level 0 and your fill servers at
-# levels 1, 2, etc..
-#
-# Several servers with the same level may be defined, they have
-# the same priority.
-Server1.Level=0
-
-# This is an optional non-reliable server (yes, no).
-#
-# Marking server as optional tells NZBGet to ignore this server if a
-# connection to this server cannot be established. Normally NZBGet
-# doesn't try upper-level servers before all servers on current level
-# were tried. If a connection to server fails NZBGet waits until the
-# server becomes available (it may try others from current level at this
-# time). This is usually what you want to avoid exhausting of
-# (costly) upper level servers if one of main servers is temporary
-# unavailable. However, for less reliable servers you may prefer to ignore
-# connection errors and go on with higher-level servers instead.
-Server1.Optional=no
-
-# Group of news server (0-99).
-#
-# If you have multiple accounts with same conditions (retention, etc.)
-# on the same news server, set the same group (greater than 0) for all
-# of them. If download fails on one news server, NZBGet does not try
-# other servers from the same group.
-#
-# Value "0" means no group defined (default).
-Server1.Group=0
-
-# Host name of news server.
-Server1.Host=my.newsserver.com
-
-# Port to connect to (1-65535).
-Server1.Port=119
-
-# User name to use for authentication.
-Server1.Username=user
-
-# Password to use for authentication.
-Server1.Password=pass
-
-# Server requires "Join Group"-command (yes, no).
-Server1.JoinGroup=no
-
-# Encrypted server connection (TLS/SSL) (yes, no).
-#
-# NOTE: By changing this option you should also change the option <ServerX.Port>
-# accordingly because unsecure and encrypted connections use different ports.
-Server1.Encryption=no
-
-# Cipher to use for encrypted server connection.
-#
-# By default (when the option is empty) the underlying encryption library
-# chooses the cipher automatically. To achieve the best performance
-# however you can manually select a faster cipher.
-#
-# See http://nzbget.net/choosing-cipher for details.
-#
-# NOTE: One of the fastest cipher is RC4. To select it use the cipher string
-# "RC4-MD5" (if NZBGet was configured to use OpenSSL) or
-# "NONE:+VERS-TLS-ALL:+ARCFOUR-128:+RSA:+MD5:+COMP-ALL"
-# (if NZBGet was configured to use GnuTLS). Note that RC4 is considered insecure
-# by the IETF (http://tools.ietf.org/html/rfc7465), but may be sufficient for
-# the usage of NZBGet.
-#
-# NOTE: You may get a TLS handshake error if the news server does
-# not support the chosen cipher. You can also get an error "Could not
-# select cipher for TLS" if the cipher string is not valid.
-Server1.Cipher=
-
-# Maximum number of simultaneous connections to this server (0-999).
-Server1.Connections=4
-
-# Server retention time (days).
-#
-# How long the articles are stored on the news server. The articles
-# whose age exceed the defined server retention time are not tried on
-# this news server, the articles are instead considered failed on this
-# news server.
-#
-# Value "0" disables retention check.
-Server1.Retention=0
-
-# IP protocol version (auto, ipv4, ipv6).
-Server1.IpVersion=auto
+{{ news_servers }}
 
 # User comments on this server.
 #
@@ -733,7 +618,7 @@ NzbDirFileAge=60
 # manually unpause another duplicate (if any exists in queue).
 #
 # NOTE: For more info on duplicates see http://nzbget.net/rss.
-DupeCheck=yes
+DupeCheck=no
 
 
 ##############################################################################

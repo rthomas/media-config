@@ -16,6 +16,10 @@ Runs the following as containers:
 - CAdvisor
 - Node Exporter
 
+### Secrets
+
+News server configuration should be put in the `nzbget.conf.secret` file in the root of this repository. This will be templated into the nabget.conf file.
+
 ### Application:
 
 ```shell
