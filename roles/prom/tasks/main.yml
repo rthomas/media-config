@@ -17,6 +17,7 @@
   docker_container:
     name: prometheus
     image: "{{prom_image}}"
+    restart_policy: "always"
     ports:
       - "9090:9090"
     volumes:
@@ -34,6 +35,7 @@
   docker_container:
     name: node_exporter
     image: "{{prom_node_image}}"
+    restart_policy: "always"
     ports:
       - "9100:9100"
     networks:

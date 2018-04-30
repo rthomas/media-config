@@ -15,6 +15,7 @@
   docker_container:
     name: radarr
     image: "{{radarr_image}}"
+    restart_policy: "always"
     ports:
       - "7878:7878"
     networks:

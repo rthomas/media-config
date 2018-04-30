@@ -23,6 +23,7 @@
   docker_container:
     name: plex
     image: "{{plex_image}}"
+    restart_policy: "always"
     network_mode: "host"
     volumes:
       - "/etc/localtime:/etc/localtime:ro"

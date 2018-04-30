@@ -20,6 +20,7 @@
   docker_container:
     name: nzbget
     image: "{{nzbget_image}}"
+    restart_policy: "always"
     ports:
       - "6789:6789"
     networks:
