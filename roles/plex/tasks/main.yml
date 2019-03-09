@@ -35,3 +35,6 @@
       PGID: "{{media_uid}}"
       PUID: "{{media_gid}}"
       TZ: "{{timezone}}"
+      VERSION: "latest"
+  tags:
+    - plex
