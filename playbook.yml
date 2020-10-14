@@ -3,9 +3,9 @@
   roles:
     - base
     - docker
-    - cadvisor
-    - prom
-    - grafana
+      #    - cadvisor
+      #    - prom
+      #    - grafana
     - nzbget
     - sonarr
     - radarr

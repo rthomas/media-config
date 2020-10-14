@@ -3,9 +3,9 @@
     name: "{{sonarr_image}}"
     state: present
 
-- name: nzbget data dir
+- name: sonarr data dir
   file:
-    name: /opt/sonarr/
+    name: "{{base_dir}}/{{config_dir}}/sonarr"
     state: directory
     owner: media
     group: media
@@ -22,7 +22,7 @@
       - name: "containers"
     volumes:
       - "/etc/localtime:/etc/localtime:ro"
-      - "/opt/sonarr:/config"
+      - "{{base_dir}}/{{config_dir}}/sonarr:/config"
       - "{{base_dir}}/{{media_dir}}/{{tv_dir}}:/tv"
       - "{{base_dir}}/{{media_dir}}/{{downloads_dir}}:/downloads"
     env:

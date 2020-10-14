@@ -5,7 +5,7 @@
 
 - name: nzbget data dir
   file:
-    name: /opt/nzbget/
+    name: "{{base_dir}}/{{config_dir}}/nzbget"
     state: directory
     owner: media
     group: media
@@ -14,7 +14,7 @@
 - name: template config file
   template:
     src: nzbget.conf.j2
-    dest: /opt/nzbget/nzbget.conf
+    dest: "{{base_dir}}/{{config_dir}}/nzbget/nzbget.conf"
 
 - name: Start container
   docker_container:
@@ -27,7 +27,7 @@
       - name: "containers"
     volumes:
       - "/etc/localtime:/etc/localtime:ro"
-      - "/opt/nzbget:/config"
+      - "{{base_dir}}/{{config_dir}}/nzbget:/config"
       - "{{base_dir}}/{{media_dir}}/{{downloads_dir}}:/downloads"
     env:
       PGID: "{{media_uid}}"

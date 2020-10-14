@@ -5,7 +5,7 @@
 
 - name: plex config dir
   file:
-    name: /opt/plex/config
+    name: "{{base_dir}}/{{config_dir}}/plex"
     state: directory
     owner: media
     group: media
@@ -13,7 +13,7 @@
 
 - name: plex transcode dir
   file:
-    name: /opt/plex/transcode
+    name: "{{base_dir}}/{{media_dir}}/plex_transcode"
     state: directory
     owner: media
     group: media
@@ -27,8 +27,8 @@
     network_mode: "host"
     volumes:
       - "/etc/localtime:/etc/localtime:ro"
-      - "/opt/plex/config:/config"
-      - "/opt/plex/transcode:/transcode"
+      - "{{base_dir}}/{{config_dir}}/plex:/config"
+      - "{{base_dir}}/{{media_dir}}/plex_transcode:/transcode"
       - "{{base_dir}}/{{media_dir}}/{{tv_dir}}:/tv"
       - "{{base_dir}}/{{media_dir}}/{{movies_dir}}:/movies"
     env:

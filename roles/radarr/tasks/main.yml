@@ -3,9 +3,9 @@
     name: "{{radarr_image}}"
     state: present
 
-- name: nzbget data dir
+- name: radarr data dir
   file:
-    name: /opt/radarr/
+    name: "{{base_dir}}/{{config_dir}}/radarr"
     state: directory
     owner: media
     group: media
@@ -22,7 +22,7 @@
       - name: "containers"
     volumes:
       - "/etc/localtime:/etc/localtime:ro"
-      - "/opt/radarr:/config"
+      - "{{base_dir}}/{{config_dir}}/radarr:/config"
       - "{{base_dir}}/{{media_dir}}/{{movies_dir}}:/movies"
       - "{{base_dir}}/{{media_dir}}/{{downloads_dir}}:/downloads"
     env:
